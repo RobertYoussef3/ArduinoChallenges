@@ -1,0 +1,32 @@
+const int reading = A2;
+const int led_pin = 2;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(led_pin, OUTPUT);
+}
+
+void loop()
+{
+  int condition;
+  condition = analogRead(reading);
+  
+  if (condition == 1023) {
+    analogWrite(led_pin, 0);
+  }
+  else if (condition <= 767){
+    analogWrite(led_pin, 191);
+  }
+  else if (condition <= 512){
+    analogWrite(led_pin, 128);
+  }
+  else if (condition <= 256){
+    analogWrite(led_pin, 64);
+  }   
+  else if (condition == 0){
+    analogWrite(led_pin, 0);
+  }
+  
+
+}
