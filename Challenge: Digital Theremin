@@ -1,0 +1,46 @@
+const int speaker_pin = 9;
+const int trigger_pin = 10;
+const int pw_pin = 10;
+const int trig_delay = 5;
+
+void setup()
+{
+  pinMode(speaker_pin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  long duration;
+  float cm;
+  pinMode(trigger_pin, OUTPUT);
+  digitalWrite(trigger_pin, LOW);
+  delayMicroseconds(10);
+  digitalWrite(trigger_pin, HIGH);
+  delayMicroseconds(trig_delay);
+  digitalWrite(trigger_pin, LOW);
+  
+  
+  pinMode(pw_pin, INPUT);
+  duration = pulseIn(pw_pin, HIGH);
+  cm = duration / 58.8;
+  Serial.print(cm);
+  Serial.println(" cm");
+  
+  
+  if (cm >= 150){
+    tone(speaker_pin, 4186.01, 500);
+  }
+  else if (cm >= 150){
+    tone(speaker_pin, 3135.96, 500);
+  }
+  else if (cm >= 100){
+    tone(speaker_pin,  2349.32, 500);
+  }
+  else if (cm >= 50){
+    tone(speaker_pin, 1760, 500);
+  }
+  
+
+  
+}
