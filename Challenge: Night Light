@@ -1,0 +1,17 @@
+const int light = A0;
+const int led = 8;
+void setup()
+{
+  pinMode(led, OUTPUT);
+}
+
+void loop()
+{
+  int brightness = analogRead(light);
+  if (brightness <= 54){
+    digitalWrite(led, HIGH);
+    delay(400);
+    digitalWrite(led, LOW);
+    delay(100);
+  }
+}
