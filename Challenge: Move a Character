@@ -1,0 +1,36 @@
+#include <LiquidCrystal.h>
+const int left = 1;
+const int right = 0;
+int left_prev = HIGH;
+int right_prev = HIGH;
+LiquidCrystal lcd(12,11,2,3,4,5);
+
+
+byte smiley[8] = {B00100,B00100,B01110,B11111,B11111,B01110,B00100, B00100};
+
+
+
+void setup()
+{
+  pinMode(left, INPUT_PULLUP);
+  pinMode(right,INPUT_PULLUP);
+  lcd.begin(16,2);
+  lcd.createChar(0, smiley);
+  lcd.clear();
+  lcd.write(byte(0));
+}
+
+void loop()
+{
+  int left_val = digitalRead(left);
+  int right_val = digitalRead(right);
+  if ((left_val == LOW) && (left_prev == HIGH)){
+    lcd.scrollDisplayLeft();
+  }
+
+  else if ((right_val == LOW) && (right_prev == HIGH)){
+    lcd.scrollDisplayRight();
+  }
+  left_prev = left_val;
+  right_prev = right_val;
+}
