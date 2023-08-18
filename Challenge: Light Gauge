@@ -1,0 +1,30 @@
+#include <Servo.h>
+
+const int light_sensor = A0;
+const int light_pin = 8;
+const int servo_pin = 9;
+Servo servo;
+
+void setup()
+{
+  Serial.begin(9600);
+  servo.attach(servo_pin);
+  pinMode(light_pin, OUTPUT);
+  
+}
+
+void loop()
+{
+  digitalWrite(light_pin, HIGH);
+  int light_val = analogRead(light_sensor);
+  Serial.println(light_val);
+  if (light_val <= 650){
+    servo.write(180);
+  }
+  else{
+    servo.write(90);
+  }
+  
+  digitalWrite(light_pin, LOW);
+  
+}
