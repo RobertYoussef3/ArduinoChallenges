@@ -1,0 +1,35 @@
+const int data_pin = 2;
+const int clock_pin = 3;
+const int latch_pin = 4;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(data_pin, OUTPUT);
+  pinMode(clock_pin, OUTPUT);
+  pinMode(latch_pin, OUTPUT);
+}
+
+void loop()
+{
+  byte x = B10000000;
+  
+  for (int z = 0; z < 7; z++){
+    shiftDisplay(x);
+    x = x >> 1;
+    delay(100);
+  }
+  
+  for (int d = 0; d < 7; d++){
+    shiftDisplay(x);
+    x = x << 1;
+    delay(100);
+  }
+  
+  }
+
+void shiftDisplay(byte data){
+  digitalWrite(latch_pin, LOW);
+  shiftOut(data_pin, clock_pin, LSBFIRST, data);
+  digitalWrite(latch_pin, HIGH);
+}
