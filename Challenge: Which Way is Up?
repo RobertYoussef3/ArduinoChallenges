@@ -1,0 +1,52 @@
+#include <math.h> 
+
+const int led_pin = 2;
+const int x_pin = A0;
+const int y_pin = A1;
+const int z_pin = A2;
+const float sensitivity = 0.206;
+float x_prev;
+float y_prev;
+float z_prev;
+
+void setup()
+{
+  pinMode(led_pin, OUTPUT);
+  analogReference(EXTERNAL);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  float x;
+  float y;
+  float z;
+  
+  x = (analogRead(A0) - 512) * 3.3 / (sensitivity * 1023);
+  y = (analogRead(A1) - 512) * 3.3 / (sensitivity * 1023);
+  z = (analogRead(A2) - 512) * 3.3 / (sensitivity * 1023);
+  
+   if ((lround(x_prev) != lround(x)) || (lround(y_prev) != lround(y)) || (lround(z_prev) != lround(z))){
+    digitalWrite(led_pin, HIGH);
+  }
+  else {
+    digitalWrite(led_pin, LOW);
+  }
+  
+  Serial.print("x: ");
+  Serial.print(x);
+  
+  Serial.print(" y: ");
+  Serial.print(y);
+  
+  Serial.print(" z: ");
+  Serial.print(z);
+  
+  Serial.println();
+  
+  x_prev = x;
+  y_prev = y;
+  z_prev = z;
+  
+  delay(100);
+}
