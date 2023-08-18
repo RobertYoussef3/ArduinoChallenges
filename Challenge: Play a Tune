@@ -1,0 +1,46 @@
+const int speaker = 5;
+
+void setup()
+{
+  pinMode(speaker, OUTPUT);
+}
+
+void loop()
+{
+  tone(speaker, 16.35, 200);
+  delay(250);
+  tone(speaker, 16.35, 200);
+  delay(250);
+  
+  tone(speaker, 24.5, 200);
+  delay(250);
+  tone(speaker, 24.5, 200);
+  delay(250);
+  
+  tone(speaker, 27.5, 200);
+  delay(250);
+  tone(speaker, 27.5, 200);
+  delay(250);
+  
+  tone(speaker, 24.5, 400);
+  delay(450);
+  
+  tone(speaker, 43.65, 200);
+  delay(250);
+  tone(speaker, 43.65, 200);
+  delay(250);
+  
+  tone(speaker, 41.20, 200);
+  delay(250);
+  tone(speaker, 41.20, 200);
+  delay(250);
+  
+  tone(speaker, 18.35, 200);
+  delay(250);
+  tone(speaker, 18.35, 200);
+  delay(250);
+  
+  tone(speaker, 16.35, 400);
+  delay(450);
+
+}
