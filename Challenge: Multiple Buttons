@@ -1,0 +1,34 @@
+const int negative_pin = 2;
+const int positive_pin = 9;
+int counter = 0;
+int previous_positive = HIGH;
+int previous_negative = HIGH;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(negative_pin, INPUT_PULLUP);
+  pinMode(positive_pin, INPUT_PULLUP);
+  
+}
+
+void loop()
+{
+  int current_positive;
+  current_positive = digitalRead(positive_pin);
+  int current_negative;
+  current_negative = digitalRead(negative_pin);
+  
+  if ((previous_negative == HIGH) && (current_negative == LOW)){
+    counter--;
+    Serial.println(counter);
+    
+  }
+  else if ((previous_positive == HIGH) && (current_positive == LOW)){
+    counter++;
+    Serial.println(counter);
+    
+  }
+  previous_negative = current_negative;
+  previous_positive = current_positive;
+}
