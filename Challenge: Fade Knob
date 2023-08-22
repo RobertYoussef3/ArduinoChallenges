@@ -4,29 +4,30 @@ const int led_pin = 2;
 void setup()
 {
   Serial.begin(9600);
-  pinMode(led_pin, OUTPUT);
+  pinMode(led_pin, OUTPUT);  // Sets pin 2 to output mode
 }
 
 void loop()
 {
   int condition;
-  condition = analogRead(reading);
+  condition = analogRead(reading); // Reads the voltage of pin A2 and assigns an integer from 0-1023 to the variable condition 
   
   if (condition == 1023) {
-    analogWrite(led_pin, 0);
+    analogWrite(led_pin, 0); // If the integer returned is 1023, then the led turns off
   }
-  else if (condition <= 767){
-    analogWrite(led_pin, 191);
+  else if ((condition >= 767) && (condition < 1023)){
+    analogWrite(led_pin, 64); // If the integer returned is greater than or equal to 767 and less than 1023, then the led has low brightness
   }
-  else if (condition <= 512){
-    analogWrite(led_pin, 128);
+  else if ((condition > 512) && (condition < 767)){
+    analogWrite(led_pin, 128); // If the integer returned is greater than 512 and less than 767, then the led has medium brightness
   }
-  else if (condition <= 256){
-    analogWrite(led_pin, 64);
+  else if ((condition > 256) && (condition < 512)){
+    analogWrite(led_pin, 191); // If the integer returned is greater than 256 and less than 512, then the led has high brightness
   }   
-  else if (condition == 0){
-    analogWrite(led_pin, 0);
+  else if ((condition > 0) && (condition < 256)){
+    analogWrite(led_pin, 255); // If the integer returned is greater than 0 and less than 256, then the led is fully on
   }
   
 
 }
+
