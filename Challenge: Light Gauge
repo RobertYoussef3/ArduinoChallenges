@@ -1,30 +1,25 @@
 #include <Servo.h>
 
-const int light_sensor = A0;
-const int light_pin = 8;
+const int light_sensor = A0; 
 const int servo_pin = 9;
-Servo servo;
+Servo servo; // Creates a Servo object named "servo"
 
 void setup()
 {
   Serial.begin(9600);
-  servo.attach(servo_pin);
-  pinMode(light_pin, OUTPUT);
+  servo.attach(servo_pin); // Attaches servo motor to pin 9
   
 }
 
 void loop()
 {
-  digitalWrite(light_pin, HIGH);
-  int light_val = analogRead(light_sensor);
-  Serial.println(light_val);
+  int light_val = analogRead(light_sensor); // Returns the reading from pin A0
+  Serial.println(light_val); // Prints the readings
   if (light_val <= 650){
-    servo.write(180);
+    servo.write(180);  // If value returned is less than or equal to 650, the servo moves to 180 degrees
   }
   else{
-    servo.write(90);
+    servo.write(90); // If above condition is not fulfilled, servo moves to 90 degrees
   }
-  
-  digitalWrite(light_pin, LOW);
-  
+    
 }
